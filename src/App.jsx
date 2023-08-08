@@ -1,19 +1,23 @@
-import { useState } from 'react'
 import './App.css'
+import {useDispatch, useSelector} from "react-redux";
+import {decrement, increment, incrementBy} from "./store/slices/counter/index.js";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const counter = useSelector((state) => { state.counter.value} )
+    const dispatch = useDispatch();
 
   return (
     <>
-      <div>
-
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={ () => dispatch( increment() )}>
+          Increment { counter }
         </button>
+          <button type='button' onClick={ () => dispatch(decrement()) }>
+              Decrement
+          </button>
+          <button type='button' onClick={ () => dispatch(incrementBy(2)) }>
+              Increment by 2
+          </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
